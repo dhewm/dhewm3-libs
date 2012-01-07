@@ -1,0 +1,11 @@
+prefix=/home/andre/devel/games/doom3-libs/x86_64-w64-mingw32
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: OpenAL
+Description: OpenAL is a cross-platform 3D audio API
+Requires: 
+Version: 1.13
+Libs: -L${libdir} -lOpenAL32 -lwinmm
+Cflags: -I${includedir} 
