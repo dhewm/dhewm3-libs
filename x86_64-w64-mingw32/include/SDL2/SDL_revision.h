@@ -1,0 +1,2 @@
+#define SDL_REVISION "hg-9798:ab7d231295cd"
+#define SDL_REVISION_NUMBER 9798
