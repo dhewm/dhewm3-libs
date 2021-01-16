@@ -1,13 +1,22 @@
 # sdl2 cmake project-config input for ./configure scripts
 
-set(prefix "/opt/local/i686-w64-mingw32") 
+# DG: I modified this so it might actually work...
+
+#set(prefix "/opt/local/i686-w64-mingw32")
+set(prefix "${CMAKE_CURRENT_LIST_DIR}/../../..") # DG: one modification..
 set(exec_prefix "${prefix}")
 set(libdir "${exec_prefix}/lib")
-set(SDL2_PREFIX "/opt/local/i686-w64-mingw32")
-set(SDL2_EXEC_PREFIX "/opt/local/i686-w64-mingw32")
+#set(SDL2_PREFIX "/opt/local/i686-w64-mingw32")
+#set(SDL2_EXEC_PREFIX "/opt/local/i686-w64-mingw32")
 set(SDL2_LIBDIR "${exec_prefix}/lib")
 set(SDL2_INCLUDE_DIRS "${prefix}/include/SDL2")
-set(SDL2_LIBRARIES "-L${SDL2_LIBDIR}  -lmingw32 -lSDL2main -lSDL2 -mwindows")
+#set(SDL2_LIBRARIES "-L${SDL2_LIBDIR}  -lmingw32 -lSDL2main -lSDL2 -mwindows")
+if(MSVC) # DG: added handling MSVC specially
+#set(SDL2_LIBRARIES "${SDL2_LIBDIR}/SDL2.lib")
+set(SDL2_LIBRARIES "SDL2")
+else() # MinGW
+set(SDL2_LIBRARIES "-lmingw32 -lSDL2 -mwindows") # DG: no SDL2main
+endif() # DG end
 string(STRIP "${SDL2_LIBRARIES}" SDL2_LIBRARIES)
 
 if(NOT TARGET SDL2::SDL2)
